@@ -5,6 +5,13 @@ import pytest
 def create_message():
     return "Message"
 
+@pytest.fixture
+def multi_level():
+    multi = "This is a multi-level fixture"
+    yield multi
+    multi = "this changed"
+    print(multi)
+
 class TestClass():
     def test_answer(self):
         assert add(1) == 2
@@ -17,3 +24,6 @@ class TestClass():
 
     def test_db(self, create_db):
         assert create_db == "db"
+
+    def test_multi(self, multi_level):
+        assert multi_level == "This is a multi-level fixture"

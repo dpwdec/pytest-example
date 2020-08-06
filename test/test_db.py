@@ -17,3 +17,7 @@ def test_add_to_db(db_session):
     db_session.add(new_user)
     db_session.commit()
     assert True
+
+def test_query_db(db_session):
+    result = db_session.query(User).filter(User.name == "Dec")
+    assert result[0].name == "Dec"

@@ -10,6 +10,7 @@ pytest = "*"
 psycopg2 = "*"
 flask = "*"
 sqlalchemy = "*"
+sqlalchemy-mixins = "*"
 
 [requires]
 python_version = "3.8"

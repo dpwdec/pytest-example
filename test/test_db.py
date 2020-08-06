@@ -18,7 +18,7 @@ def db_session():
     return session
 
 def test_add_to_db(db_session):
-    new_user = User(name="Dec", age=50)
+    new_user = User(name="Dec", age=55)
     db_session.add(new_user)
     db_session.commit()
     assert True
@@ -33,3 +33,16 @@ def test_update_db(db_session):
     db_session.commit()
     result = db_session.query(User).filter(User.age == 46)
     assert result[0].name == "Mike"
+
+def test_update_attr(db_session):
+    mike = db_session.query(User).filter(User.name == "Mike").first()
+    setattr(mike, 'age', mike.age + 2)
+    db_session.commit()
+    mike = db_session.query(User).filter(User.age == 48).first()
+    assert mike.name == "Mike"
+
+def test_update_inplace(db_session):
+    db_session.query(User).filter(User.name == "Mike").update({'age': (User.age + 2)})
+    db_session.commit()
+    mike = db_session.query(User).filter(User.age == 50).first()
+    assert mike.name == "Mike"

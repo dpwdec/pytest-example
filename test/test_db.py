@@ -1,21 +1,16 @@
 import pytest
 from database import Base, db, Session
-from user.model import User
+from user.model import User, Address
 
 @pytest.fixture(scope="module", autouse=True)
 def setup_base():
-    Base.metadata.drop_all(bind=db, tables=[User.__table__])
+    Base.metadata.drop_all(bind=db, tables=[User.__table__, Address.__table__])
     Base.metadata.create_all(db)
     session = Session()
     change_user = User(name="Mike", age=44)
     session.add(change_user)
     session.commit()
     session.close()
-
-@pytest.fixture(scope="module")
-def db_session():
-    session = Session()
-    return session
 
 def test_add_to_db(db_session):
     new_user = User(name="Dec", age=55)

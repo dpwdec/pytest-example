@@ -46,3 +46,13 @@ def test_update_inplace(db_session):
     db_session.commit()
     mike = db_session.query(User).filter(User.age == 50).first()
     assert mike.name == "Mike"
+
+def test_add_multiple(db_session):
+    db_session.add_all([
+        User(name="John", age=90),
+        User(name="Philo", age=98),
+        User(name="Paris", age=95)
+    ])
+    db_session.commit()
+    result = db_session.query(User).filter(User.age >= 90)
+    assert result.count() == 3

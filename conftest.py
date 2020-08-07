@@ -8,4 +8,5 @@ def create_db():
 @pytest.fixture(scope="module")
 def db_session():
     session = Session()
-    return session
+    yield session
+    session.close()

@@ -20,7 +20,11 @@ def test_db_relationships(db_session):
     lomothy = db_session.query(User).filter(User.name == "Lomothy").first()
     assert len(lomothy.addresses) == 2
 
-def test_db_child(db_session):
+def test_db_child_id(db_session):
     result = db_session.query(Address).filter(Address.user_id == 1)
+    assert result.count() == 2
+
+def test_db_child_name(db_session):
+    result = db_session.query(Address).filter(Address.email.like("lomothy%"))
     assert result.count() == 2
 

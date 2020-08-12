@@ -11,6 +11,7 @@ psycopg2 = "*"
 flask = "*"
 sqlalchemy = "*"
 sqlalchemy-mixins = "*"
+pytest-mock = "*"
 
 [requires]
 python_version = "3.8"

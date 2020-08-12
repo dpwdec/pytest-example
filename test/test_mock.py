@@ -4,3 +4,7 @@ from app import get_operating_system
 def test_get_operating_system(mocker):
     mocker.patch("app.is_windows", return_value=True)
     assert get_operating_system() == 'Windows'
+
+def test_get_operating_linux(mocker):
+    mocker.patch("app.is_windows", return_value=False)
+    assert get_operating_system() == 'Linux'
